@@ -1,0 +1,999 @@
+/* ==========================================================================
+   脱・ドパガキ道場 (DopaDetox Dojo) - Stylesheet
+   Modern Zen Minimalism & Neuromorphic Dark Theme
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0a0e14;
+  --bg-card: rgba(22, 27, 34, 0.85);
+  --bg-card-hover: rgba(30, 37, 46, 0.95);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(56, 189, 248, 0.4);
+
+  --text-main: #e6edf3;
+  --text-muted: #8b949e;
+  --text-dim: #484f58;
+
+  --accent-zen: #10b981;     /* Calm Green */
+  --accent-cyan: #38bdf8;    /* Serene Sky */
+  --accent-purple: #a855f7;  /* Focus Indigo */
+  --accent-dopa: #f43f5e;    /* Brain Juice / Craving Red */
+  --accent-gold: #f59e0b;    /* Level / EXP Gold */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.25);
+  --shadow-glow-zen: 0 0 25px rgba(16, 185, 129, 0.25);
+  --shadow-glow-dopa: 0 0 25px rgba(244, 63, 94, 0.3);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Hiragino Sans", "Meiryo", sans-serif;
+  --font-serif: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+/* ==========================================================================
+   Header & Status Bar
+   ========================================================================== */
+header {
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(10, 14, 20, 0.8);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+.brand-text h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff 30%, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-text p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Player Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+}
+
+.status-badge {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent-gold);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.exp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 110px;
+}
+
+.exp-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+.exp-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-zen));
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* Sound Controller */
+.audio-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audio-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.audio-btn:hover, .audio-btn.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   Navigation Tabs
+   ========================================================================== */
+.nav-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.tab-btn.active {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
+}
+
+.tab-btn.danger-highlight {
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #fca5a5;
+}
+
+.tab-btn.danger-highlight.active {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: var(--accent-dopa);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(244, 63, 94, 0.25);
+}
+
+/* ==========================================================================
+   Main Content Panels
+   ========================================================================== */
+main {
+  flex: 1;
+}
+
+.panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards & Layout */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header {
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Tab 1: 脳汁診断 (Test)
+   ========================================================================== */
+.quiz-progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-dopa));
+  transition: width 0.3s ease;
+}
+
+.question-box {
+  margin-bottom: 1.75rem;
+}
+
+.question-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 0.4rem;
+}
+
+.question-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.option-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.option-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--accent-cyan);
+  transform: translateX(4px);
+}
+
+.option-btn.selected {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-cyan);
+  color: #fff;
+}
+
+/* Diagnosis Result Card */
+.result-container {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.rank-badge-box {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: var(--radius-md);
+  background: radial-gradient(circle at center, rgba(244, 63, 94, 0.12) 0%, transparent 70%);
+  margin-bottom: 1.5rem;
+}
+
+.rank-badge-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rank-badge-name {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+}
+
+.rank-badge-desc {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.score-display {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.75rem;
+}
+
+.radar-chart-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.prescription-box {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.prescription-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-zen);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prescription-list {
+  font-size: 0.88rem;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.prescription-list li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.prescription-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent-zen);
+  font-weight: bold;
+}
+
+/* Share & Action Buttons */
+.action-btn-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+}
+
+.btn-zen {
+  background: linear-gradient(135deg, var(--accent-zen), #059669);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.btn-zen:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.btn-dopa {
+  background: linear-gradient(135deg, var(--accent-dopa), #be123c);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35);
+}
+
+.btn-dopa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Tab 2: 脳汁SOS (緊急ドーパミンスワップ)
+   ========================================================================== */
+.sos-hero {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.sos-trigger-btn {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fb7185, #e11d48);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 35px rgba(225, 29, 72, 0.45);
+  margin: 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.25s ease;
+  animation: pulse-sos 2s infinite ease-in-out;
+}
+
+@keyframes pulse-sos {
+  0% { transform: scale(1); box-shadow: 0 0 25px rgba(225, 29, 72, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 45px rgba(225, 29, 72, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 25px rgba(225, 29, 72, 0.4); }
+}
+
+.sos-trigger-btn:hover {
+  transform: scale(1.08);
+}
+
+.sos-box {
+  display: none;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Box Breathing Guide */
+.breathing-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.breathing-circle-wrap {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathing-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.6), rgba(16, 185, 129, 0.3));
+  border: 2px solid var(--accent-cyan);
+  transition: transform 4s linear;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+}
+
+.breathing-instruction {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.breathing-seconds {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+
+/* Urge Surfing Timer */
+.timer-counter {
+  font-size: 3rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-cyan);
+  margin: 0.5rem 0;
+}
+
+/* 30-Sec Offline Action Gacha */
+.gacha-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--accent-zen);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.gacha-action-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-zen);
+  margin-bottom: 0.5rem;
+}
+
+.gacha-action-detail {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Tab 3: 何もしないチャレンジ (Zen Silence)
+   ========================================================================== */
+.zen-challenge-wrap {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.zen-time-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.zen-time-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zen-time-btn:hover, .zen-time-btn.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--accent-zen);
+  color: #fff;
+}
+
+/* Zen Meditation Active Overlay */
+.zen-active-view {
+  display: none;
+  position: relative;
+  padding: 3rem 1rem;
+}
+
+.zen-ripple-ring {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: ripple-breath 6s infinite ease-in-out;
+}
+
+@keyframes ripple-breath {
+  0% { transform: scale(0.92); border-color: rgba(16, 185, 129, 0.2); }
+  50% { transform: scale(1.08); border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 0 35px rgba(16, 185, 129, 0.15); }
+  100% { transform: scale(0.92); border-color: rgba(16, 185, 129, 0.2); }
+}
+
+.zen-timer-big {
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.zen-rule-notice {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.zen-fail-message {
+  display: none;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid var(--accent-dopa);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* ==========================================================================
+   Tab 4: 活字リハビリ (Slow Reading)
+   ========================================================================== */
+.reading-selector-row {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.reading-article-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 2.2;
+  letter-spacing: 0.05em;
+  color: #d1d5db;
+  position: relative;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.reading-p {
+  margin-bottom: 1.5rem;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  position: relative;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.reading-p:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.reading-p.reading-highlight {
+  background: rgba(56, 189, 248, 0.12);
+  color: #ffffff;
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.reading-quiz-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================================
+   Tab 5: 習慣・防壁 (Habits & Hacks)
+   ========================================================================== */
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.habit-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.habit-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.habit-item.checked {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.habit-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.habit-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.habit-item.checked .habit-check {
+  border-color: var(--accent-zen);
+  background: var(--accent-zen);
+  color: #fff;
+}
+
+.habit-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.habit-item.checked .habit-label {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.habit-exp-tag {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.12);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* Physical Hacks Accordion / Grid */
+.hack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.hack-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.hack-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.hack-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--accent-cyan);
+}
+
+.hack-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Tab 6: 脳の科学 (Science & Mechanism)
+   ========================================================================== */
+.science-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loop-diagram {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.loop-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.loop-step-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-align: center;
+}
+
+.loop-num {
+  font-size: 0.75rem;
+  color: var(--accent-dopa);
+  font-weight: 800;
+}
+
+.loop-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0.25rem 0;
+}
+
+.loop-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-top: 1rem;
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.comparison-table th {
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 700;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .status-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .card {
+    padding: 1.25rem;
+  }
+  .timer-counter {
+    font-size: 2.25rem;
+  }
+  .zen-timer-big {
+    font-size: 2.75rem;
+  }
+}

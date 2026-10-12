@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脱・ドパガキ道場 (DopaDetox Dojo) - 脳汁中毒からの完全解脱</title>
+  <meta name="description" content="ショート動画・無限スクロール・過剰刺激に焼かれた前頭葉を取り戻す。科学的アプローチと禅メディテーションによる実践型ドーパミンデトックスWebアプリ。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+
+  <!-- HEADER & STATUS BAR -->
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-icon">🧠</span>
+        <div class="brand-text">
+          <h1>脱・ドパガキ道場</h1>
+          <p>DopaDetox Dojo - 前頭葉再生ステーション</p>
+        </div>
+      </div>
+
+      <!-- Player Stats -->
+      <div class="status-bar">
+        <div class="status-item">
+          <span>🔥</span>
+          <span class="status-badge" id="stat-streak">1日連続</span>
+        </div>
+        <div class="status-item">
+          <span>🥋</span>
+          <span id="stat-title" style="font-weight:700; font-size:0.85rem;">Lv.1 脳汁漬け見習い</span>
+        </div>
+        <div class="exp-container">
+          <div class="exp-label">
+            <span>前頭葉EXP</span>
+            <span id="stat-exp-text">0 / 100 EXP</span>
+          </div>
+          <div class="exp-bar">
+            <div class="exp-fill" id="stat-exp-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ambient Audio Controls -->
+      <div class="audio-ctrl">
+        <button class="audio-btn" id="btn-sound-rain" title="雨音（集中・鎮静）">🌧️ 雨音</button>
+        <button class="audio-btn" id="btn-sound-ocean" title="波音（リラックス）">🌊 波音</button>
+        <button class="audio-btn" id="btn-sound-drone" title="432Hz 瞑想ドローン音">🧘 432Hz</button>
+        <button class="audio-btn" id="btn-sound-stop" title="音声を停止">🔇 停止</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN NAVIGATION TABS -->
+  <div class="container">
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-test">🩺 脳汁診断</button>
+      <button class="tab-btn danger-highlight" data-tab="tab-sos">🚨 脳汁SOS</button>
+      <button class="tab-btn" data-tab="tab-zen">🧘 何もしない修行</button>
+      <button class="tab-btn" data-tab="tab-reading">📖 活字リハビリ</button>
+      <button class="tab-btn" data-tab="tab-habits">🛡️ 習慣・防壁</button>
+      <button class="tab-btn" data-tab="tab-science">🧬 脳の科学</button>
+    </nav>
+
+    <!-- ======================================================================
+         TAB 1: 脳汁診断 (Test)
+         ====================================================================== -->
+    <section id="tab-test" class="panel active">
+      <!-- Question Card -->
+      <div class="card" id="quiz-question-card">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+        </div>
+        <div class="question-box">
+          <div class="question-num" id="quiz-question-num">質問 1 / 10</div>
+          <h2 class="question-text" id="quiz-question-text">読み込み中...</h2>
+          <div class="options-grid" id="quiz-options-grid"></div>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div class="card result-container" id="quiz-result-card">
+        <div class="rank-badge-box">
+          <div class="rank-badge-title" id="result-rank-title">判定結果</div>
+          <div class="rank-badge-name" id="result-rank-name">--</div>
+          <div class="rank-badge-desc" id="result-rank-desc">--</div>
+          <div>
+            <span class="score-display" id="result-score-val">0 / 30 点</span>
+          </div>
+        </div>
+
+        <!-- Radar Chart SVG -->
+        <div style="text-align:center;">
+          <h3 style="font-size:1rem; margin-bottom:0.5rem; color:var(--text-muted);">前頭葉ダメージ分析レーダー</h3>
+          <div class="radar-chart-wrap">
+            <svg id="radar-svg" width="300" height="300" viewBox="0 0 300 300">
+              <!-- Web Polygons -->
+              <polygon points="150,50 250,150 150,250 50,150" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"></polygon>
+              <polygon points="150,83 217,150 150,217 83,150" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"></polygon>
+              <polygon points="150,116 184,150 150,184 116,150" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"></polygon>
+              
+              <!-- Axes -->
+              <line x1="150" y1="50" x2="150" y2="250" stroke="rgba(255,255,255,0.1)" stroke-width="1"></line>
+              <line x1="50" y1="150" x2="250" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"></line>
+
+              <!-- Labels -->
+              <text x="150" y="38" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">即時刺激依存</text>
+              <text x="262" y="154" text-anchor="start" fill="#f43f5e" font-size="11" font-weight="bold">集中持続崩壊</text>
+              <text x="150" y="272" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold">禁断・幻覚症状</text>
+              <text x="38" y="154" text-anchor="end" fill="#a855f7" font-size="11" font-weight="bold">思考停止・受動性</text>
+
+              <!-- Dynamic Player Shape -->
+              <polygon id="radar-polygon" points="150,150 150,150 150,150 150,150" fill="rgba(244, 63, 94, 0.35)" stroke="#f43f5e" stroke-width="2.5"></polygon>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Prescription -->
+        <div class="prescription-box">
+          <div class="prescription-title">
+            <span>💊</span> あなたの緊急処方箋
+          </div>
+          <ul class="prescription-list" id="result-presc-list"></ul>
+        </div>
+
+        <div class="action-btn-row">
+          <a class="btn btn-primary" id="btn-quiz-share" href="#" target="_blank">
+            <span>𝕏</span> 診断結果をシェアする
+          </a>
+          <button class="btn btn-zen" id="btn-goto-training">
+            <span>🥋</span> 道場で修行を開始する
+          </button>
+          <button class="btn btn-secondary" id="btn-quiz-retake">
+            <span>🔄</span> もう一度診断する
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: 脳汁SOS (緊急ドーパミンスワップ)
+         ====================================================================== -->
+    <section id="tab-sos" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><span>🚨</span> 脳汁エマージェンシースイッチ</h2>
+          <p class="card-subtitle">「ショート動画が見たい！」「ガチャを引きたい！」と強い衝動が走った瞬間に押してください。</p>
+        </div>
+
+        <div class="sos-hero">
+          <p style="font-size:0.95rem; color:var(--text-muted); max-width:540px; margin:0 auto;">
+            ドーパミンの強烈な渇望（Craving）は、脳科学的に<strong>「90秒〜3分」</strong>で波のようにピークを過ぎて減衰します。この波を乗り切る（Urge Surfing）ことで前頭葉の主権を取り戻せます。
+          </p>
+          <button class="sos-trigger-btn" id="btn-sos-trigger">
+            <span>SOS</span>
+            <span style="font-size:0.75rem; font-weight:normal;">衝動を遮断する</span>
+          </button>
+        </div>
+
+        <!-- Active SOS Intervention Box -->
+        <div class="sos-box" id="sos-active-box">
+          <h3 style="color:var(--accent-cyan); font-size:1.15rem; margin-bottom:0.5rem;">🌊 衝動の波乗り（Urge Surfing）実行中</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted);">
+            画面の円に合わせて深く呼吸してください。衝動の波を見つめ、消え去るのを観察します。
+          </p>
+
+          <div class="breathing-box">
+            <div class="breathing-circle-wrap">
+              <div class="breathing-circle" id="breathing-circle"></div>
+              <div class="breathing-instruction" id="breathing-instruction">息を吸う (4秒)</div>
+            </div>
+            <div class="timer-counter" id="urge-timer-counter">1:30</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">衝動が引くまであと...</div>
+          </div>
+
+          <!-- Offline Micro-Action -->
+          <div class="gacha-card">
+            <div style="font-size:0.75rem; color:var(--accent-zen); font-weight:bold; letter-spacing:0.05em; margin-bottom:0.25rem;">
+              ⚡ 刺激スワップ（代替アクション）
+            </div>
+            <div class="gacha-action-title" id="gacha-action-title">冷たい水で顔を洗う & 1杯の水を飲む</div>
+            <div class="gacha-action-detail" id="gacha-action-desc">
+              冷水刺激によって副交感神経が急激に活性化し、興奮した脳汁ループを物理的に鎮静化させます。
+            </div>
+            <div style="margin-top:1rem; display:flex; justify-content:center; gap:0.75rem;">
+              <button class="btn btn-zen" id="btn-gacha-complete">実行完了した (+25 EXP)</button>
+              <button class="btn btn-secondary" id="btn-gacha-reroll">別のアクション</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 3: 何もしないチャレンジ (Zen Silence)
+         ====================================================================== -->
+    <section id="tab-zen" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><span>🧘</span> 何もしない修行（デジタル沈黙）</h2>
+          <p class="card-subtitle">
+            「退屈」を受け入れる練習です。マウスを動かしたり、別タブを開いたりすると即失敗になります。
+          </p>
+        </div>
+
+        <div class="zen-challenge-wrap">
+          <!-- Setup View -->
+          <div id="zen-setup-view">
+            <p style="font-size:0.95rem; color:var(--text-main); margin-bottom:1.5rem;">
+              修行時間を選び、姿勢を正して「修行開始」を押してください。<br>
+              <span style="font-size:0.85rem; color:var(--text-muted);">
+                ※画面に触れたり、タブを変えたり、キーを押すと集中が途切れて失敗になります。
+              </span>
+            </p>
+
+            <div class="zen-time-selector">
+              <button class="zen-time-btn active" data-seconds="60">1分（見習いコース）</button>
+              <button class="zen-time-btn" data-seconds="180">3分（修行僧コース）</button>
+              <button class="zen-time-btn" data-seconds="300">5分（解脱仙人コース）</button>
+            </div>
+
+            <button class="btn btn-zen" id="btn-zen-start" style="font-size:1.1rem; padding:0.9rem 2.2rem;">
+              <span>🥋</span> 修行を開始する
+            </button>
+          </div>
+
+          <!-- Active Meditation View -->
+          <div id="zen-active-view" class="zen-active-view">
+            <div class="zen-ripple-ring">
+              <div class="zen-timer-big" id="zen-timer-big">1:00</div>
+            </div>
+            <p class="zen-rule-notice">
+              そのまま動かず、呼吸に意識を向けてください。<br>
+              刺激を求めず、何もない今を感じます。
+            </p>
+            <div style="margin-top:2rem;">
+              <button class="btn btn-secondary" id="btn-zen-cancel" style="font-size:0.85rem;">修行を中断する</button>
+            </div>
+          </div>
+
+          <!-- Failure Alert -->
+          <div class="zen-fail-message" id="zen-fail-message">
+            <h4 style="color:var(--accent-dopa); font-size:1.1rem; margin-bottom:0.4rem;">⚠️ 修行失敗！</h4>
+            <p id="zen-fail-reason" style="font-size:0.9rem; color:var(--text-main);"></p>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">
+              何もしないことは、現代で最も難しい高等技術です。恥じることはありません。深呼吸して再挑戦しましょう。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 4: 活字リハビリ (Slow Reading)
+         ====================================================================== -->
+    <section id="tab-reading" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><span>📖</span> 活字リハビリ道場（スローリーディング）</h2>
+          <p class="card-subtitle">
+            ショート動画の早口・要約・テロップに慣れた脳を癒し、一文字ずつ味わう読解力を回復させます。
+          </p>
+        </div>
+
+        <div class="reading-selector-row" id="reading-selector-row"></div>
+
+        <div style="margin-bottom:1rem; display:flex; justify-content:space-between; align-items:flex-end;">
+          <div>
+            <h3 id="reading-title" style="font-size:1.15rem; font-weight:700;">--</h3>
+            <span id="reading-author" style="font-size:0.8rem; color:var(--text-muted);">--</span>
+          </div>
+          <span style="font-size:0.75rem; color:var(--text-dim);">※段落をクリックすると集中ハイライト</span>
+        </div>
+
+        <!-- Book Reading Box -->
+        <div class="reading-article-box" id="reading-box"></div>
+
+        <div style="margin-top:1.25rem; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.82rem; color:var(--text-muted);">
+            倍速読みせず、情景を思い浮かべながら最低15秒以上かけてじっくりお読みください。
+          </span>
+          <button class="btn btn-primary" id="btn-reading-finish">
+            <span>✅</span> 読了・理解度チェック (+40 EXP)
+          </button>
+        </div>
+
+        <!-- Quiz Box -->
+        <div class="reading-quiz-box" id="reading-quiz-box" style="display:none;">
+          <h4 style="font-size:1rem; margin-bottom:0.75rem; color:var(--accent-cyan);">読了確認ミニテスト</h4>
+          <p id="reading-quiz-q" style="font-size:0.95rem; margin-bottom:1rem; font-weight:600;">--</p>
+          <div class="options-grid" id="reading-quiz-options"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 5: 習慣・防壁 (Habits & Hacks)
+         ====================================================================== -->
+    <section id="tab-habits" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><span>🛡️</span> 本日の防衛チェックリスト</h2>
+          <p class="card-subtitle">
+            意志の力だけに頼らず、ルールで生活を守りましょう。毎日達成してストリークを伸ばしてください。
+          </p>
+        </div>
+
+        <div class="habit-list">
+          <div class="habit-item" data-habit="morningNoPhone">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">朝起きて最初の30分はスマホを見ない</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+
+          <div class="habit-item" data-habit="mealNoPhone">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">食事中にスマホを触らない（味覚に集中する）</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+
+          <div class="habit-item" data-habit="toiletNoPhone">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">トイレにスマホを持ち込まない</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+
+          <div class="habit-item" data-habit="disableNotifications">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">SNS・動画アプリのプッシュ通知をOFFにする</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+
+          <div class="habit-item" data-habit="bedNoScreen">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">就寝前30分は画面を消し、スマホを手の届かない場所に置く</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+
+          <div class="habit-item" data-habit="grayscaleMode">
+            <div class="habit-left">
+              <div class="habit-check">✓</div>
+              <span class="habit-label">画面の表示設定を「白黒（モノクロ）」にする</span>
+            </div>
+            <span class="habit-exp-tag">+15 EXP</span>
+          </div>
+        </div>
+
+        <!-- Physical Environmental Hacks -->
+        <h3 style="font-size:1.1rem; margin-top:2.5rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.4rem;">
+          <span>⚙️</span> スマホを物理的に無力化する神ハック
+        </h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+          ドーパミン中毒は「意志の弱さ」ではなく「脳の進化とアルゴリズムのミスマッチ」です。環境を物理的にハックするのが最大の防御です。
+        </p>
+
+        <div class="hack-grid">
+          <div class="hack-card">
+            <div class="hack-icon">⬛</div>
+            <div class="hack-title">画面のモノクロ化</div>
+            <div class="hack-desc">
+              iOSは「アクセシビリティ ＞ 画面表示とテキストサイズ ＞ カラーフィルタ ＞ グレースケール」、Androidは「Digital Wellbeing ＞ おやすみ時間モード」で設定。アプリの赤いバッジや派手なサムネイルの魅力が半減し、触る回数が劇的に激減します。
+            </div>
+          </div>
+
+          <div class="hack-card">
+            <div class="hack-icon">📦</div>
+            <div class="hack-title">物理隔離（タイムロッキングコンテナ）</div>
+            <div class="hack-desc">
+              指定した時間まで絶対に開かないタイマー付きボックスや、充電スタンドを「寝室の外の廊下」に設置。スマホが視界にあるだけで脳のリソースは奪われるため、視界から消すのが鉄則です。
+            </div>
+          </div>
+
+          <div class="hack-card">
+            <div class="hack-icon">🚪</div>
+            <div class="hack-title">アプリの摩擦（フリクション）追加</div>
+            <div class="hack-desc">
+              ショート動画アプリをホーム画面から削除し、ブラウザ版のみにして毎回ログアウト。開くまでにパスワード入力などの「面倒くささ」を挟むことで、脊髄反射の起動を防止します。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 6: 脳の科学 (Science & Mechanism)
+         ====================================================================== -->
+    <section id="tab-science" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><span>🧬</span> なぜあなたの脳は焼かれたのか？（メカニズム解説）</h2>
+          <p class="card-subtitle">敵を知り、己を知れば百戦危うからず。ドーパミンの仕組みを科学的に理解しましょう。</p>
+        </div>
+
+        <div class="science-flow">
+          <!-- The Dopamine Loop -->
+          <div class="loop-diagram">
+            <h3 style="font-size:1.05rem; color:var(--accent-cyan); margin-bottom:0.5rem;">
+              🔄 ドーパミン・ループの罠
+            </h3>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              ドーパミンは「快楽の物質」ではなく、<strong>「何か面白いことがあるかもしれないという【予期・探索】の物質」</strong>です。ショート動画はこの探索本能をハイジャックしています。
+            </p>
+            <div class="loop-steps">
+              <div class="loop-step-card">
+                <div class="loop-num">STEP 1</div>
+                <div class="loop-title">予期とスワイプ</div>
+                <div class="loop-desc">「次は面白い動画かも？」という不確実な報酬への期待でドーパミンが放出。</div>
+              </div>
+              <div class="loop-step-card">
+                <div class="loop-num">STEP 2</div>
+                <div class="loop-title">超短期の報酬</div>
+                <div class="loop-desc">数秒で笑える・刺激的な動画に到達。脳が「スワイプ＝報酬」と強烈に学習。</div>
+              </div>
+              <div class="loop-step-card">
+                <div class="loop-num">STEP 3</div>
+                <div class="loop-title">受容体のダウンレギュレーション</div>
+                <div class="loop-desc">過剰な刺激から身を守るため、脳が受容体を減らす。日常の普通のことが退屈に感じる。</div>
+              </div>
+              <div class="loop-step-card">
+                <div class="loop-num">STEP 4</div>
+                <div class="loop-title">更なる渇望</div>
+                <div class="loop-desc">通常刺激では満足できず、より過激で速い刺激を求めて無限スクロールのゾンビ化へ。</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison Table -->
+          <div>
+            <h3 style="font-size:1.05rem; color:var(--accent-zen); margin-bottom:0.5rem;">
+              ⚖️ ドーパミン（興奮）vs セロトニン（幸福）
+            </h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>ドーパミン（刺激・渇望）</th>
+                  <th>セロトニン（安らぎ・充足）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>感情の本質</strong></td>
+                  <td>「もっと欲しい！」「次は何か？」</td>
+                  <td>「これで十分」「満たされている」</td>
+                </tr>
+                <tr>
+                  <td><strong>もたらす状態</strong></td>
+                  <td>興奮、中毒、焦燥感、焦り</td>
+                  <td>静寂、安心感、深い集中、感謝</td>
+                </tr>
+                <tr>
+                  <td><strong>発生トリガー</strong></td>
+                  <td>ショート動画、ガチャ、通知、いいね</td>
+                  <td>日光、散歩、深呼吸、読書、何もしない時間</td>
+                </tr>
+                <tr>
+                  <td><strong>耐性の有無</strong></td>
+                  <td>耐性がつきやすく、エスカレートする</td>
+                  <td>耐性がつかず、持続的な幸福をもたらす</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Detox Timeline -->
+          <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1.25rem;">
+            <h3 style="font-size:1.05rem; color:var(--accent-gold); margin-bottom:0.5rem;">
+              📈 脱ドパガキの回復ロードマップ
+            </h3>
+            <ul style="font-size:0.88rem; list-style-type:none; display:flex; flex-direction:column; gap:0.6rem;">
+              <li><strong>📅 1〜3日目（禁断期）:</strong> 手持ち無沙汰で落ち着かず、スマホを探す衝動が最も強い。SOSスイッチを多用して乗り切るべし。</li>
+              <li><strong>📅 1週間後（沈静期）:</strong> 頭の霧（Brain Fog）が晴れ始め、睡眠の質が改善。読書が10分以上続くようになる。</li>
+              <li><strong>📅 2週間後（受容体回復期）:</strong> 日常の些細なこと（食事の味、散歩、会話）が楽しく感じられるようになり、集中力が飛躍的に向上。</li>
+              <li><strong>📅 1ヶ月後（解脱期）:</strong> ショート動画を見たいという衝動そのものが消失。主体的に自分の時間と注意力を支配できる「真の自由」を獲得。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>脱・ドパガキ道場 (DopaDetox Dojo) &copy; 2026 - 前頭葉を取り戻し、自分の人生を生きよう。</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
