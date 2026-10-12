@@ -4,7 +4,13 @@
 
 ---
 
-## 🚀 使い方
+## 🌐 オンラインで試す（GitHub Pages）
+スマホやPCのブラウザから直接アクセスできます：
+👉 **[https://kam2525-hub.github.io/dopa-detox/](https://kam2525-hub.github.io/dopa-detox/)**
+
+---
+
+## 🚀 ローカルでの使い方
 
 ### 方法 1: ダブルクリックで直接開く
 フォルダ内の `start.bat` をダブルクリック、または `index.html` をお好みのブラウザ（Chrome, Edge等）で直接開くだけで即座に動作します。
